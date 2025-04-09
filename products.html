@@ -1,0 +1,890 @@
+<!-- PRODUCTS PAGE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2E7D32;
+            --accent-color: #FF9800;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --medium-gray: #777;
+            --white: #ffffff;
+            --black: #000000;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: var(--dark-gray);
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Navigation Styles */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 5px;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .nav-links a.active {
+            color: var(--white);
+            background-color: var(--primary-color);
+        }
+
+        /* Navigation Icons */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            border-radius: 50%;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-icons a:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--primary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Products Page Specific */
+        .filter-bar {
+            background-color: var(--light-gray);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--white);
+            min-width: 150px;
+        }
+
+        .search-filter {
+            display: flex;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-filter input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-filter button {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--medium-gray);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            font-size: 14px;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .product-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .original-price {
+            font-size: 16px;
+            text-decoration: line-through;
+            color: var(--medium-gray);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .stars {
+            color: var(--accent-color);
+        }
+
+        .rating-count {
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .wishlist {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            color: var(--medium-gray);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .wishlist:hover {
+            background-color: #ffecb3;
+            color: var(--accent-color);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--white);
+            color: var(--dark-gray);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .pagination-item:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: var(--primary-color);
+        }
+
+        .pagination-item.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .contact-info li i {
+            margin-top: 5px;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-icons {
+            display: flex;
+            gap: 10px;
+            font-size: 24px;
+        }
+        @media (max-width: 768px) {
+            header .container {
+                padding: 15px;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: var(--shadow);
+                z-index: 100;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .nav-links.show {
+                max-height: 500px;
+            }
+
+            .nav-links li {
+                margin: 0;
+                width: 100%;
+                border-bottom: 1px solid var(--light-gray);
+            }
+
+            .nav-links a {
+                padding: 15px 20px;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-filter {
+                max-width: 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+
+            .footer-columns {
+                gap: 40px;
+            }
+
+            .footer-column {
+                flex: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>ShopEase</h1></a>
+            </div>
+            <nav>
+                <div class="mobile-menu" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                </a>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>Discover a wide range of high-quality products at competitive prices, all with fast shipping and easy returns.</p>
+        </div>
+    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="iPhone-15-Pro-Max.webp" alt="smartphone" width="600" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3 class="product-name">Smartphone Pro Max</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱77,799.99</span>
+                            <span class="original-price">₱82,899.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(42)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="slimbook.jpg" alt="Red t-shirt" width="300" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3 class="product-name">Ultrabook Slim Pro</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱31,299.99</span>
+                            <span class="original-price">₱44,499.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(37)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="headset.jpg" alt="Red t-shirt" width="300" height="500" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Electronics</div>
+                        <h3 class="product-name">Wireless Headphones</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱2,149.99</span>
+                            <span class="original-price">₱4,199.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(28)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="tshirt.avif" alt="Red t-shirt" width="300" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Fashion</div>
+                        <h3 class="product-name">Premium Cotton T-Shirt</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱1024.99</span>
+                            <span class="original-price">₱1544.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(56)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="sofa set.jpg" alt="Red t-shirt" width="300" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Home</div>
+                        <h3 class="product-name">Luxury Sofa Set</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱189,899.99</span>
+                            <span class="original-price">₱241,099.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(19)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="blender.jpg" alt="Red t-shirt" width="300" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Home</div>
+                        <h3 class="product-name">Multi-Function Blender</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱1,879.99</span>
+                            <span class="original-price">₱2,999.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(32)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="runningshoes.webp" alt="Red t-shirt" width="300" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Fashion</div>
+                        <h3 class="product-name">Running Shoes</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱5,499.99</span>
+                            <span class="original-price">₱7,129.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(45)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="skincareset.jpg" alt="Red t-shirt" width="300" height="200" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Beauty</div>
+                        <h3 class="product-name">Skin Care Set</h3>
+                        <div class="product-price">
+                            <span class="current-price">₱849.99</span>
+                            <span class="original-price">₱1289.99</span>
+                        </div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(74)</span>
+                        </div>
+                        <div class="product-actions">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>ShopEase</h3>
+                    <p>Making online shopping easier and more enjoyable for everyone.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="deals.html">Deals</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Shopping St, E-Commerce City</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> support@shopease.com</li>
+                    </ul>
+                </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        &copy; 2025 ShopEase. All rights reserved.
+                    </div>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fab fa-cc-discover"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+        <script>
+            document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+                document.getElementById('nav-links').classList.toggle('show');
+            });
+
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.getElementById('cart-count');
+            let count = 0;
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    count++;
+                    cartCount.textContent = count;
+                    alert('Product added to cart!');
+                });
+            });
+            const wishlistButtons = document.querySelectorAll('.wishlist');
+            
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        alert('Product added to wishlist!');
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        alert('Product removed from wishlist!');
+                    }
+                });
+                
+            });
+        </script>
+    </body>
+    </html>

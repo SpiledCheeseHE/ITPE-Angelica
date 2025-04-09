@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="loader">
+        <div class="spinner"></div>
+
+        <div class="logo">
+            <a href="index.html"><h1>ShopEase</h1></a>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#" data-page="home"><h1>ShopEase</h1></a>
+            </div>
+            <nav>
+                <div class="mobile-menu" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+                    </ul>
+                </a>
+                <a href="#" id="cart-toggle" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <span class="close-cart" id="close-cart">&times;</span>
+        </div>
+        <div class="cart-items" id="cart-items">
+        </div>
+        <div class="cart-total" id="cart-total">
+            <div class="cart-total-row">
+                <span class="cart-total-title">Subtotal:</span>
+                <span class="cart-total-amount" id="cart-subtotal">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span class="cart-total-title">Tax:</span>
+                <span class="cart-total-amount" id="cart-tax">$0.00</span>
+            </div>
+            <div class="cart-total-row">
+                <span class="cart-total-title">Total:</span>
+                <span class="cart-total-amount" id="cart-total-amount">$0.00</span>
+            </div>
+            <button class="btn primary-btn checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+    <div class="search-modal" id="search-modal">
+        <div class="search-container">
+            <span class="close-search" id="close-search">&times;</span>
+            <input type="text" class="search-input" id="search-input" placeholder="Search products...">
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Shop Smarter, Not Harder</h2>
+                    <p>Discover amazing deals on thousands of products with fast shipping and easy returns.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn primary-btn" data-page="products">Shop Now</a>
+                        <a href="#" class="btn secondary-btn" data-page="deals">View Deals</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-categories">
+            <div class="container">
+                    </a>
+                    <a href="#" class="category-card" data-category="fashion">
+                    </a>
+                    <a href="#" class="category-card" data-category="home">
+                    </a>
+                    <a href="#" class="category-card" data-category="beauty">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="product-grid" id="featured-products">
+                </div>
+            </div>
+        </section>
+
+        <section class="deals-section">
+            <div class="container">
+                <h2 class="section-title">Hot Deals</h2>
+                <div class="deals-timer">
+                    <p>Ends in: <span id="deals-countdown">23:59:59</span></p>
+                </div>
+                <div class="product-grid" id="deals-products">
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <div class="testimonial-slider" id="testimonial-slider">
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn prev" id="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next" id="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get the latest updates on new products and special promotions.</p>
+                    <form id="newsletter-form" class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="btn primary-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>ShopEase</h3>
+                    <p>Making online shopping easier and more enjoyable for everyone.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="products.html" class="active">Products</a></li>
+                        <li><a href="about.html" class="active">About Us</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#" data-page="faq">FAQ</a></li>
+                        <li><a href="#" data-page="shipping">Shipping Policy</a></li>
+                        <li><a href="#" data-page="returns">Returns & Refunds</a></li>
+                        <li><a href="#" data-page="terms">Terms & Conditions</a></li>
+                        <li><a href="#" data-page="privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Shopping St, E-Commerce City</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> support@shopease.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopEase. All rights reserved.</p>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>
